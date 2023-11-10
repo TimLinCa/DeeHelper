@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ir/7V92ZxAOoOC9ZvVyQhDVbaDI5Cc3+QDXft/eF0fhbhXIJk369AL8+eV9FlcRHeShHK1e+T5J6ZPxq/4Q5Fg==",
+  "dgSpecHash": "FjqI1z4L68iQLHeP4g0iDg4Iobqbo0qsVWuX6vZXY2g2mvzQ29EYRbN3g3fE6HnwcqeAxLO/aZ05a3viViOxSQ==",
   "success": true,
-  "projectFilePath": "E:\\cmf\\DeeHelper\\DeeHelper\\DeeHelper.csproj",
+  "projectFilePath": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\b9110\\.nuget\\packages\\community.visualstudio.toolkit.16\\16.0.430\\community.visualstudio.toolkit.16.16.0.430.nupkg.sha512",
-    "C:\\Users\\b9110\\.nuget\\packages\\community.visualstudio.toolkit.17\\17.0.507\\community.visualstudio.toolkit.17.17.0.507.nupkg.sha512",
     "C:\\Users\\b9110\\.nuget\\packages\\community.visualstudio.toolkit.analyzers\\1.0.430\\community.visualstudio.toolkit.analyzers.1.0.430.nupkg.sha512",
     "C:\\Users\\b9110\\.nuget\\packages\\community.visualstudio.vsct\\16.0.29.6\\community.visualstudio.vsct.16.0.29.6.nupkg.sha512",
     "C:\\Users\\b9110\\.nuget\\packages\\envdte\\8.0.2\\envdte.8.0.2.nupkg.sha512",

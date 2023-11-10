@@ -24,13 +24,6 @@
           "build/Community.VisualStudio.Toolkit.16.targets": {}
         }
       },
-      "Community.VisualStudio.Toolkit.17/17.0.507": {
-        "type": "package",
-        "build": {
-          "build/Community.VisualStudio.Toolkit.17.props": {},
-          "build/Community.VisualStudio.Toolkit.17.targets": {}
-        }
-      },
       "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
         "type": "package"
       },
@@ -1496,13 +1489,6 @@
           "build/Community.VisualStudio.Toolkit.16.targets": {}
         }
       },
-      "Community.VisualStudio.Toolkit.17/17.0.507": {
-        "type": "package",
-        "build": {
-          "build/Community.VisualStudio.Toolkit.17.props": {},
-          "build/Community.VisualStudio.Toolkit.17.targets": {}
-        }
-      },
       "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
         "type": "package"
       },
@@ -2942,13 +2928,6 @@
         "build": {
           "build/Community.VisualStudio.Toolkit.16.props": {},
           "build/Community.VisualStudio.Toolkit.16.targets": {}
-        }
-      },
-      "Community.VisualStudio.Toolkit.17/17.0.507": {
-        "type": "package",
-        "build": {
-          "build/Community.VisualStudio.Toolkit.17.props": {},
-          "build/Community.VisualStudio.Toolkit.17.targets": {}
         }
       },
       "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
@@ -4392,13 +4371,6 @@
           "build/Community.VisualStudio.Toolkit.16.targets": {}
         }
       },
-      "Community.VisualStudio.Toolkit.17/17.0.507": {
-        "type": "package",
-        "build": {
-          "build/Community.VisualStudio.Toolkit.17.props": {},
-          "build/Community.VisualStudio.Toolkit.17.targets": {}
-        }
-      },
       "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
         "type": "package"
       },
@@ -5838,13 +5810,6 @@
         "build": {
           "build/Community.VisualStudio.Toolkit.16.props": {},
           "build/Community.VisualStudio.Toolkit.16.targets": {}
-        }
-      },
-      "Community.VisualStudio.Toolkit.17/17.0.507": {
-        "type": "package",
-        "build": {
-          "build/Community.VisualStudio.Toolkit.17.props": {},
-          "build/Community.VisualStudio.Toolkit.17.targets": {}
         }
       },
       "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
@@ -7287,28 +7252,6 @@
         "community.visualstudio.toolkit.16.nuspec",
         "lib/net472/Community.VisualStudio.Toolkit.dll",
         "lib/net472/Community.VisualStudio.Toolkit.xml"
-      ]
-    },
-    "Community.VisualStudio.Toolkit.17/17.0.507": {
-      "sha512": "xx6WpVN/MAthrTqN2OcbHQTkWyFb/2edspeGEHpkfHojzH+NPA4QKb12Ns+ZovR+v2dZOUZW9ssOxsf3XmaLwg==",
-      "type": "package",
-      "path": "community.visualstudio.toolkit.17/17.0.507",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "build/AssemblyInfo.cs",
-        "build/Community.VisualStudio.Toolkit.17.props",
-        "build/Community.VisualStudio.Toolkit.17.targets",
-        "build/imports/Constants.props",
-        "build/imports/ExtensibilityEssentialsCheck.targets",
-        "build/imports/MSBuildCapabilities.props",
-        "build/imports/NewtonsoftJsonVersionCheck.targets",
-        "build/imports/PublishToMarketplace.targets",
-        "community.visualstudio.toolkit.17.17.0.507.nupkg.sha512",
-        "community.visualstudio.toolkit.17.nuspec",
-        "lib/net48/Community.VisualStudio.Toolkit.dll",
-        "lib/net48/Community.VisualStudio.Toolkit.xml"
       ]
     },
     "Community.VisualStudio.Toolkit.Analyzers/1.0.430": {
@@ -9416,7 +9359,6 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "Community.VisualStudio.Toolkit.16 >= 16.0.430",
-      "Community.VisualStudio.Toolkit.17 >= 17.0.507",
       "Community.VisualStudio.VSCT >= 16.0.29.6",
       "Microsoft.VSSDK.BuildTools >= 16.10.1055"
     ]
@@ -9427,11 +9369,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\cmf\\DeeHelper\\DeeHelper\\DeeHelper.csproj",
+      "projectUniqueName": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj",
       "projectName": "DeeHelper",
-      "projectPath": "E:\\cmf\\DeeHelper\\DeeHelper\\DeeHelper.csproj",
+      "projectPath": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj",
       "packagesPath": "C:\\Users\\b9110\\.nuget\\packages\\",
-      "outputPath": "E:\\cmf\\DeeHelper\\DeeHelper\\obj\\",
+      "outputPath": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -9458,10 +9400,6 @@
             "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "target": "Package",
             "version": "[16.0.430, )"
-          },
-          "Community.VisualStudio.Toolkit.17": {
-            "target": "Package",
-            "version": "[17.0.507, )"
           },
           "Community.VisualStudio.VSCT": {
             "suppressParent": "All",
