@@ -1,0 +1,25 @@
+Crticalmanufacturing MES v9
+v9
+Support Visual Studio 2022 Community
+
+Crticalmanufacturing MES v8
+
+v8.5
+1. Add "Get ActionGroup" Window" in view menu.
+
+v8.4
+1. Available to disable sort and remove using command.
+
+v8.3
+1. Add assembles for .AsEnumerable() function.
+2. Available to config strat and end line of action code and vaildation code.
+
+v8.2
+Fix Debug:
+1. When using statement has "=", have problem to find Usereference.
+
+v8.1 
+New function:
+1. Can scan which Business Object is using
+
+v8.0 Find Use Rreference sentences

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DeeReferenceHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe" Version="1.6" Language="en-US" Publisher="Tim Lin" />
+        <Identity Id="DeeReferenceHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe" Version="8.5" Language="en-US" Publisher="Tim Lin" />
         <DisplayName>DeeReferenceHelper</DisplayName>
         <Description xml:space="preserve">CriticalManufaturing Dee Reference helper</Description>
         <ReleaseNotes>ReleaseNote.txt</ReleaseNotes>
-        <Icon>Resources\Icon.png</Icon>
-        <PreviewImage>Resources\Icon.png</PreviewImage>
+        <Icon>Icon.png</Icon>
+        <PreviewImage>Icon.png</PreviewImage>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 18.0)" />
-        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Enterprise" />
-        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Pro" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
     </Installation>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,)" DisplayName="Visual Studio core editor" />

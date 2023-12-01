@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj": {}
+    "D:\\CMF\\Tools\\DeeHelper\\DeeHelper\\DeeHelper.csproj": {}
   },
   "projects": {
-    "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj": {
+    "D:\\CMF\\Tools\\DeeHelper\\DeeHelper\\DeeHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj",
+        "projectUniqueName": "D:\\CMF\\Tools\\DeeHelper\\DeeHelper\\DeeHelper.csproj",
         "projectName": "DeeHelper",
-        "projectPath": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\DeeHelper.csproj",
+        "projectPath": "D:\\CMF\\Tools\\DeeHelper\\DeeHelper\\DeeHelper.csproj",
         "packagesPath": "C:\\Users\\b9110\\.nuget\\packages\\",
-        "outputPath": "D:\\CMF\\Tools\\DeeHelper_Git\\DeeHelper\\obj\\",
+        "outputPath": "D:\\CMF\\Tools\\DeeHelper\\DeeHelper\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -44,10 +44,9 @@
               "target": "Package",
               "version": "[16.0.29.6, )"
             },
-            "Microsoft.VSSDK.BuildTools": {
+            "Microsoft.VisualStudio.SDK": {
               "target": "Package",
-              "version": "[16.10.1055, )",
-              "generatePathProperty": true
+              "version": "[16.10.31321.278, )"
             }
           }
         }

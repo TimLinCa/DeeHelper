@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="DeeHelper.GetActionGroupWindow.GetActionGroupWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="400"
+             Name="MyToolWindow">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid Height="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="URL:" FontSize="10" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <TextBox Margin="0,4,10,4" x:Name="URLTextBox" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+                <Button Grid.Column="2" Height="21" BorderBrush="Black" Foreground="Black" Background="White" Content="Generate" Click="GenerateURLCommand"></Button>
+            </Grid>
+
+            <Grid Height="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.085*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Pre:" FontSize="10" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <TextBox IsReadOnly="True" Grid.Column="2" x:Name="ActionGroupPreTextBox" Margin="0,4" VerticalContentAlignment="Center"></TextBox>
+            </Grid>
+
+            <Grid Height="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.085*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Post:" FontSize="10" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <TextBox IsReadOnly="True" Grid.Column="2" x:Name="ActionGroupPostTextBox" Margin="0,4" VerticalContentAlignment="Center"></TextBox>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
