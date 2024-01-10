@@ -370,10 +370,8 @@ D:\CMF\Tools\DeeHelper\DeeHelper\bin\Debug\VSLangProj90.dll
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper.csproj.AssemblyReference.cache
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\GetActionGroupWindow\GetActionGroupWindowControl.baml
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\GetActionGroupWindow\GetActionGroupWindowControl.g.cs
-D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\Options\GeneralOptions.g.cs
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper_MarkupCompile.cache
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper_MarkupCompile.lref
-D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\Options\GeneralOptions.baml
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper.g.resources
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\_EmptyResource.resources
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper.csproj.GenerateResource.cache
@@ -391,6 +389,11 @@ D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\DeeHelper.latest.pkgdef
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\extension.vsixmanifest
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\files.json
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\createTemplateManifests.cache
+D:\CMF\Tools\DeeHelper\DeeHelper\bin\Debug\Icon.png
+D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\GeneralOptions.g.cs
+D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\GeneralOptions.baml
+D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\CutomizedReferenceLists.g.cs
+D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\CutomizedReferenceLists.baml
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\VSCT.read.1.tlog
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\VSCT.write.1.tlog
 D:\CMF\Tools\DeeHelper\DeeHelper\obj\Debug\_EmptyResource.resources.original

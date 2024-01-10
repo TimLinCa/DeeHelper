@@ -1,8 +1,17 @@
 Crticalmanufacturing MES v9
-v9
+v9.2
+Can define mutiple start and end line
+
+v9.1
+Added customized reference optional page.
+
+v9.0
 Support Visual Studio 2022 Community
 
 Crticalmanufacturing MES v8
+
+v8.6
+Added customized reference optional page.
 
 v8.5
 1. Add "Get ActionGroup" Window" in view menu.

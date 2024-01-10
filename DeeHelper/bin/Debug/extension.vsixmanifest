@@ -1,18 +1,15 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
   <Metadata>
-    <Identity Id="DeeReferenceHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe" Version="8.5" Language="en-US" Publisher="Tim Lin" />
+    <Identity Id="DeeReferenceHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe" Version="8.7" Language="en-US" Publisher="Tim Lin" />
     <DisplayName>DeeReferenceHelper</DisplayName>
     <Description xml:space="preserve">CriticalManufaturing Dee Reference helper</Description>
     <ReleaseNotes>ReleaseNote.txt</ReleaseNotes>
-    <Icon>Resources\Icon.png</Icon>
-    <PreviewImage>Resources\Icon.png</PreviewImage>
+    <Icon>Icon.png</Icon>
+    <PreviewImage>Icon.png</PreviewImage>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)">
       <ProductArchitecture>x86</ProductArchitecture>
-    </InstallationTarget>
-    <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
-      <ProductArchitecture>amd64</ProductArchitecture>
     </InstallationTarget>
   </Installation>
   <Prerequisites>

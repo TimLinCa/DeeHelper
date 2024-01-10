@@ -1,7 +1,6 @@
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\DeeHelper_v17.csproj.AssemblyReference.cache
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\GetActionGroupWindow\GetActionGroupWindowControl.baml
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\GetActionGroupWindow\GetActionGroupWindowControl.g.cs
-D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\Options\GeneralOptions.g.cs
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\DeeHelper_MarkupCompile.cache
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\DeeHelper_MarkupCompile.lref
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\Community.VisualStudio.Toolkit.dll
@@ -305,7 +304,6 @@ D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\VSLangProj165.dll
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\VSLangProj2.dll
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\VSLangProj80.dll
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\VSLangProj90.dll
-D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\Options\GeneralOptions.baml
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\DeeHelper.g.resources
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\_EmptyResource.resources
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\DeeHelper_v17.csproj.GenerateResource.cache
@@ -327,3 +325,7 @@ D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\ctoFiles.json
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\mergeCto.cache
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\Icon.png
 D:\CMF\Tools\DeeHelper\DeeHelper_v17\bin\Debug\ReleaseNote.txt
+D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\GeneralOptions.g.cs
+D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\GeneralOptions.baml
+D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\CutomizedReferenceLists.g.cs
+D:\CMF\Tools\DeeHelper\DeeHelper_v17\obj\Debug\CutomizedReferenceLists.baml

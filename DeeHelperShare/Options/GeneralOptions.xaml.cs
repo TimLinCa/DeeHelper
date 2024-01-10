@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Shell;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +37,7 @@ namespace DeeHelper.Options
             VaildationCodeStartTextBox.Text = General.Instance.ValidationCodeStartLine;
             VaildationCodeEndTextBox.Text = General.Instance.ValidationCodeEndLine;
             ScanBusinessObjectsCheckBox.IsChecked = General.Instance.ScanBusinessObjects;
-            SortUsingLine.IsChecked = General.Instance.IsRortandRemoveUsing;
+            SortUsingLine.IsChecked = General.Instance.IsSortandRemoveUsing;
             General.Instance.Save();
         }
 
@@ -85,8 +88,60 @@ namespace DeeHelper.Options
 
         private void SortReferenceClick(object sender, RoutedEventArgs e)
         {
-            General.Instance.IsRortandRemoveUsing = SortUsingLine.IsChecked.Value;
+            General.Instance.IsSortandRemoveUsing = SortUsingLine.IsChecked.Value;
             General.Instance.Save();
+        }
+
+        private void GotFocusEvent(Object sender, EventArgs e)
+        {
+            string Name = string.Empty;
+            if (sender is TextBox)
+            {
+                TextBox textBox = sender as TextBox;
+                Name = textBox.Name;
+            }
+            if(sender is CheckBox)
+            {
+                CheckBox checkBox = sender as CheckBox;
+                Name = checkBox.Name;
+            }
+
+            switch (Name)
+            {
+                case "BusnissPathTextBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "BusinessTierPath");
+                    break;
+                case "ActionCodeStartTextBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ActionCodeStartLine");
+                    break;
+                case "ActionCodeEndTextBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ActionCodeEndLine");
+                    break;
+                case "VaildationCodeStartTextBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ValidationCodeStartLine");
+                    break;
+                case "VaildationCodeEndTextBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ValidationCodeEndLine");
+                    break;
+                case "ScanBusinessObjectsCheckBox":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ScanBusinessObjects");
+                    break;
+                case "SortUsingLine":
+                    DescriptionTB.Text = GetDescription(General.Instance, "IsSortandRemoveUsing");
+                    break;
+            }
+
+
+        }
+
+        private static string GetDescription<T>(T item, string propertyName) where T : class
+        {
+            PropertyInfo propertyInfo = typeof(T).GetProperties().FirstOrDefault(p => p.Name == propertyName);
+            if (propertyInfo == null) return propertyName;
+            else
+            {
+                return Attribute.IsDefined(propertyInfo, typeof(DescriptionAttribute)) ? (Attribute.GetCustomAttribute(propertyInfo, typeof(DescriptionAttribute)) as DescriptionAttribute).Description : propertyInfo.Name;
+            }
         }
     }
 }

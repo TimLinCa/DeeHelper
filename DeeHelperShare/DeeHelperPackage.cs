@@ -13,7 +13,10 @@ namespace DeeHelper
     [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(GeneralOptionPage), "DeeReferenceHelper", "General", 0, 0, true)]
-    [ProvideProfile(typeof(GeneralOptionPage), "DeeReferenceHelper", "General", 0, 0, true)]
+    [ProvideProfile(typeof(OptionsProvider.GeneralOptions), "DeeReferenceHelper", "General", 0, 0, true)]
+    [ProvideOptionPage(typeof(CutomizedReferenceListPage), "DeeReferenceHelper", "CustomizedReferenceList", 0, 0, true, SupportsProfiles = true)]
+    [ProvideProfile(typeof(OptionsProvider.CustomizedReferenceListOptions), "DeeReferenceHelper", "CustomizedReferenceList", 0, 0, true)]
+
     [Guid(PackageGuids.DeeHelperString)]
     [ProvideToolWindow(typeof(GetActionGroupWindow.GetActionGroupWindow))]
     public sealed class DeeHelperPackage : ToolkitPackage

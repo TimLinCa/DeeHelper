@@ -11,7 +11,7 @@ namespace DeeHelper
         public const string Name = "DeeReferenceHelper";
         public const string Description = @"CriticalManufaturing Dee Reference helper";
         public const string Language = "en-US";
-        public const string Version = "8.5";
+        public const string Version = "8.7";
         public const string Author = "Tim Lin";
         public const string Tags = "";
     }

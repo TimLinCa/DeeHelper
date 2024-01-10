@@ -56,13 +56,6 @@
     <Compile Include="GetActionGroupWindow\GetActionGroupWindowControl.xaml.cs">
       <DependentUpon>GetActionGroupWindowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Options\General.cs" />
-    <Compile Include="Options\GeneralOptionPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Options\GeneralOptions.xaml.cs">
-      <DependentUpon>GeneralOptions.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>
@@ -113,10 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="GetActionGroupWindow\GetActionGroupWindowControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Options\GeneralOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,20 +7,20 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using Microsoft.VisualStudio.Shell;
 
+
 namespace DeeHelper.Options
 {
     [ComVisible(true)]
-    [Guid(PackageGuids.DeeHelperString)]
-
-    public class GeneralOptionPage : UIElementDialogPage
+    [Guid("D8B47497-8AC9-4E2E-9D62-D8E8E7A47AA4")]
+    public class CutomizedReferenceListPage : UIElementDialogPage
     {
         protected override UIElement Child
         {
             get
             {
-                GeneralOptions page = new GeneralOptions
+                CutomizedReferenceLists page = new CutomizedReferenceLists
                 {
-                    generalOptionsPage = this
+                    cutomizedReferenceListPage = this
                 };
                 page.Initialize();
                 return page;

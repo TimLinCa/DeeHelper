@@ -3,8 +3,10 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
@@ -18,10 +20,15 @@ namespace DeeHelper
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
             List<string> LosingDll = new List<string>();
-            var options = await General.GetLiveInstanceAsync();
-            if(options.IsRortandRemoveUsing) await VS.Commands.ExecuteAsync("Edit.RemoveAndSort");
-
-            await Task.Delay(500);
+            General options = await General.GetLiveInstanceAsync();
+            CustomizedReferenceList customizedReferenceList = await CustomizedReferenceList.GetLiveInstanceAsync();
+            List<ReferenceList> referenceLists = customizedReferenceList.ReferencesList;
+ 
+            if (options.IsSortandRemoveUsing)
+            {
+                bool isfinished = await VS.Commands.ExecuteAsync("Edit.RemoveAndSort");
+                await Task.Delay(500);
+            }
 
             var textviewlines = await GetActiveDocumentLineContext();
             List<string> usingString = new List<string>();
@@ -34,8 +41,6 @@ namespace DeeHelper
 
             usingString = usingString.Where(st => st.Contains("using")).ToList();
             usingString = usingString.Select(st => st.Replace(";", string.Empty)).ToList();
-          
-
 
             string[] DllFilesName = Directory.GetFiles(options.BusinessTierPath).Where(file => file.EndsWith(".dll")).ToArray();
             List<string> usingAssmbles = new List<string>();
@@ -58,6 +63,14 @@ namespace DeeHelper
                 if (namespaceString.Substring(0, 6) == "System") continue;
                 while (true)
                 {
+                    if (referenceLists.Any(rl => rl.NameSpace == namespaceString))
+                    {
+                        List<ReferenceList> currentReferenceList = referenceLists.Where(rl => rl.NameSpace == namespaceString).ToList();
+                        List<string> currentUsingAssembles = currentReferenceList.Where(crl => crl.Assembles != string.Empty).Select(crl => crl.Assembles.Split(';')).ToList().SelectMany(_ => _).Distinct().ToList();
+                        currentUsingAssembles = currentUsingAssembles.Select(name => getdllreference(name)).ToList();
+                        usingAssmbles.AddRange(currentUsingAssembles);
+                        break;
+                    }
                     //Normal
                     if (dllfilenames.Any(dllfilename => dllfilename == namespaceString))
                     {
@@ -82,11 +95,11 @@ namespace DeeHelper
                             if (options.ScanBusinessObjects)
                             {
                                 List<string> customdllname = dllfilenames.Where(dllfilename => dllfilename.Contains("Cmf.Custom.") && dllfilename.Contains("BusinessObjects")).ToList();
- 
+
                                 foreach (string customdll in customdllname)
                                 {
                                     string objectName = customdll.Substring(customdll.LastIndexOf(".") + 1);
-                                    if(IsContainerObject(textviewlines, objectName, options))
+                                    if (IsContainObject(textviewlines, objectName, options))
                                     {
                                         string usereferencedll = getdllreference(customdll);
                                         if (!usingAssmbles.Contains(usereferencedll)) usingAssmbles.Add(usereferencedll);
@@ -95,6 +108,7 @@ namespace DeeHelper
                             }
                             else
                             {
+                                // add all customized library
                                 if (isaddcustmodll) break;
                                 List<string> customdllname = dllfilenames.Where(dllfilename => dllfilename.Contains("Cmf.Custom.") && dllfilename.Contains("BusinessObjects")).ToList();
                                 foreach (string customdll in customdllname)
@@ -121,13 +135,14 @@ namespace DeeHelper
 
             //Detect .AsEnumerable()
             string AsEnumerableStr = ".AsEnumerable()";
-            if (IsContainerObject(textviewlines, AsEnumerableStr, options))
+            if (IsContainObject(textviewlines, AsEnumerableStr, options))
             {
                 usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel"));
                 usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel.Primitives"));
                 usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.Xml.ReaderWriter"));
                 usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.private.Xml"));
             }
+            usingAssmbles.Distinct();
             string DeeResult = newLine;
             DeeResult += "/**Using Assembles**/" + newLine;
             foreach (string assmblename in usingAssmbles) DeeResult += assmblename + newLine;
@@ -146,7 +161,7 @@ namespace DeeHelper
                 deleteLine = textviewlines_temp.FirstOrDefault(line => (line.Extent.GetText().Contains("UseReference(") ||
                 line.Extent.GetText().Contains("Using Assembles") ||
                 line.Extent.GetText().Contains("Using NameSpace")) &&
-                !line.Extent.GetText().Contains(options.ActionCodeStartLine));
+                !line.Extent.GetText().Contains(options.ActionCodeStartLine.Split(';').ToList()));
 
                 if (deleteLine != null) docView_temp.TextBuffer.Delete(deleteLine.ExtentIncludingLineBreak);
                 else break;
@@ -154,7 +169,7 @@ namespace DeeHelper
 
             textviewlines = await GetActiveDocumentLineContext();
 
-            ITextSnapshotLine startWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeStartLine));
+            ITextSnapshotLine startWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeStartLine.Split(';').ToList()));
 
             if (startWpfText == null)
             {
@@ -167,7 +182,7 @@ namespace DeeHelper
 
             if (LosingDll.Any())
             {
-                await VS.MessageBox.ShowWarningAsync($"{string.Join(",", LosingDll)} cannot find any dll which realted to");
+                await VS.MessageBox.ShowWarningAsync($"{string.Join(",", LosingDll)} cannot find any related library to use. Please add the library manually.");
                 return;
             }
         }
@@ -204,17 +219,21 @@ namespace DeeHelper
 
         private string getdllreference(string dllname)
         {
-            return $"UseReference(\"{dllname}.dll\", \"\");";
+            if (!dllname.Contains("dll"))
+            {
+                return $"UseReference(\"{dllname}.dll\", \"\");";
+            }
+            return $"UseReference(\"{dllname}\", \"\");";
         }
 
-        private bool IsContainerObject(List<ITextSnapshotLine> textviewlines, string objectName, General options)
+        private bool IsContainObject(List<ITextSnapshotLine> textviewlines, string objectName, General options)
         {
-            
-            ITextSnapshotLine startWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeStartLine));
-            ITextSnapshotLine endWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeEndLine));
 
-            ITextSnapshotLine ValidationCodeStartWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ValidationCodeStartLine));
-            ITextSnapshotLine ValidationCodeEndWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ValidationCodeEndLine));
+            ITextSnapshotLine startWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeStartLine.Split(';').ToList()));
+            ITextSnapshotLine endWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeEndLine.Split(';').ToList()));
+
+            ITextSnapshotLine ValidationCodeStartWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ValidationCodeStartLine.Split(';').ToList()));
+            ITextSnapshotLine ValidationCodeEndWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ValidationCodeEndLine.Split(';').ToList()));
 
             int StartDetectLine = textviewlines.IndexOf(startWpfText) + 1;
             int EndDetectLine = textviewlines.IndexOf(endWpfText) - 1;
@@ -240,5 +259,6 @@ namespace DeeHelper
 
             return false;
         }
+
     }
 }
