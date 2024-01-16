@@ -20,19 +20,17 @@ namespace DeeHelper
     {
         [Category("General")]
         [DisplayName("CMF BusinessTier Folder Path ")]
-        [Description("The using assemblies to be used will be determined by the DLL file located in this folder. Please select the ‘businessTier’ folder of the project")]
-        [DefaultValue(@"C:\Program Files\CriticalManufacturing\BusinessTier")]
-        public string BusinessTierPath { get; set; } = @"C:\Program Files\CriticalManufacturing\BusinessTier";
+        [Description("Selected a project name from project name list which was created in BusinessTierPath optional page.")]
+        public string ProjectName { get; set; }
 
         [Category("Dee Detected Options")]
         [Description("Use this string as a marker to identify the starting line of the action code. This string can represent multiple values, which are separated by semicolons.")]
         [DisplayName("ActionCodeStartLine")]
-
         public string ActionCodeStartLine { get; set; } = "START OF USER-DEFINED CODE;Start DEE Code";
+
         [Category("Dee Detected Options")]
         [Description("Use this string as a marker to identify the ending line of the action code. This string can represent multiple values, which are separated by semicolons.")]
         [DisplayName("ActionCodeEndLine")]
-       
         public string ActionCodeEndLine { get; set; } = "END OF USER-DEFINED CODE;End DEE Code";
 
         [Category("Dee Detected Options")]

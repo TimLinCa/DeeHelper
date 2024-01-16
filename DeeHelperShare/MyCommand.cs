@@ -21,9 +21,15 @@ namespace DeeHelper
         {
             List<string> LosingDll = new List<string>();
             General options = await General.GetLiveInstanceAsync();
+            if(options.ProjectName == string.Empty || options.ProjectName == null)
+            {
+                await VS.MessageBox.ShowWarningAsync($"Please select a project name on optional page.");
+                return;
+            }
             CustomizedReferenceList customizedReferenceList = await CustomizedReferenceList.GetLiveInstanceAsync();
             List<ReferenceList> referenceLists = customizedReferenceList.ReferencesList;
- 
+            BusinessTierPathList businessTierPathList = await BusinessTierPathList.GetLiveInstanceAsync();
+            List<BusinessTierPathObj> businessPathObjs = businessTierPathList.BusinessTierPaths;
             if (options.IsSortandRemoveUsing)
             {
                 bool isfinished = await VS.Commands.ExecuteAsync("Edit.RemoveAndSort");
@@ -42,7 +48,7 @@ namespace DeeHelper
             usingString = usingString.Where(st => st.Contains("using")).ToList();
             usingString = usingString.Select(st => st.Replace(";", string.Empty)).ToList();
 
-            string[] DllFilesName = Directory.GetFiles(options.BusinessTierPath).Where(file => file.EndsWith(".dll")).ToArray();
+            string[] DllFilesName = Directory.GetFiles(businessPathObjs.First(obj=>obj.ProjectName == options.ProjectName).BusinessTierFolderPath).Where(file => file.EndsWith(".dll")).ToArray();
             List<string> usingAssmbles = new List<string>();
             List<string> usingNamespace = new List<string>();
             List<string> dllfilenames = new List<string>(); ;
@@ -106,10 +112,11 @@ namespace DeeHelper
                                     }
                                 }
                             }
+                            // break if added custom dll.
+                            else if (isaddcustmodll) break;
+                            // add all customized library
                             else
                             {
-                                // add all customized library
-                                if (isaddcustmodll) break;
                                 List<string> customdllname = dllfilenames.Where(dllfilename => dllfilename.Contains("Cmf.Custom.") && dllfilename.Contains("BusinessObjects")).ToList();
                                 foreach (string customdll in customdllname)
                                 {
@@ -120,9 +127,11 @@ namespace DeeHelper
                             }
                             break;
                         }
+                        //Trim namespace for next loop
                         namespaceString = namespaceString.Substring(0, namespaceString.LastIndexOf("."));
                         continue;
                     }
+                    //Couldn't find the dll.
                     else
                     {
                         LosingDll.Add(Regex.Replace(usingtext, "using", ""));
@@ -153,6 +162,7 @@ namespace DeeHelper
                 else DeeResult += namespacename;
             }
 
+            //Delete UseReference line
             while (true)
             {
                 var docView_temp = await VS.Documents.GetActiveDocumentViewAsync();
@@ -169,17 +179,22 @@ namespace DeeHelper
 
             textviewlines = await GetActiveDocumentLineContext();
 
+            //Find Actiob code started line
             ITextSnapshotLine startWpfText = textviewlines.FirstOrDefault(line => line.Extent.GetText().Contains(options.ActionCodeStartLine.Split(';').ToList()));
-
             if (startWpfText == null)
             {
                 await VS.MessageBox.ShowWarningAsync($"Cannot find {options.ActionCodeStartLine} text line");
                 return;
             }
+
+            //Insert UseReference to file
             var docView = await VS.Documents.GetActiveDocumentViewAsync();
             docView.TextBuffer.Insert(startWpfText.End.Position, DeeResult);
+
+            //Format Code
             await VS.Commands.ExecuteAsync("Edit.FormatDocument");
 
+            //Show warning message which shows what dll couldn't find
             if (LosingDll.Any())
             {
                 await VS.MessageBox.ShowWarningAsync($"{string.Join(",", LosingDll)} cannot find any related library to use. Please add the library manually.");

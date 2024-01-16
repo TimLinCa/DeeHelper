@@ -7,8 +7,8 @@ namespace DeeHelper
 {
     internal sealed partial class Vsix
     {
-        public const string Id = "DeeReferenceHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe";
-        public const string Name = "DeeReferenceHelper";
+        public const string Id = "DeeHelper.55d96ae0-09ad-4bb3-966b-a227f765a6fe";
+        public const string Name = "DeeHelper";
         public const string Description = @"CriticalManufaturing Dee Reference helper";
         public const string Language = "en-US";
         public const string Version = "8.7";

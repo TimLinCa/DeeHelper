@@ -19,7 +19,6 @@ namespace DeeHelper
         [Category("CustomizedReferenceList")]
         [DisplayName("ReferenceList")]
         [Description("Define the corresponding assembly of the namespace. Assemblies can be multiple values separated by semicolons.")]
-        [DefaultValue(true)]
         public List<ReferenceList> ReferencesList { get; set; } = new List<ReferenceList>() { new ReferenceList() { NameSpace = "Z.Expressions", Assembles = "Z.Expressions.Eval.dll" } };
     }
 

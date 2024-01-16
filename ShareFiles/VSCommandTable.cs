@@ -14,9 +14,6 @@ namespace DeeHelper
     {
         public const string DeeHelperString = "87c960f5-4cb6-4b85-ba33-c7c0b44ea1fd";
         public static Guid DeeHelper = new Guid(DeeHelperString);
-
-        public const string guidDeeHelperPackageCmdSetString = "7a69a15e-8d77-4824-bceb-9bb90766f316";
-        public static Guid guidDeeHelperPackageCmdSet = new Guid(guidDeeHelperPackageCmdSetString);
     }
     /// <summary>
     /// Helper class that encapsulates all CommandIDs uses across VS Package.

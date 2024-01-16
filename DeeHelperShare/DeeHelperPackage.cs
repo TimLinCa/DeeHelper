@@ -14,8 +14,12 @@ namespace DeeHelper
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(GeneralOptionPage), "DeeReferenceHelper", "General", 0, 0, true)]
     [ProvideProfile(typeof(OptionsProvider.GeneralOptions), "DeeReferenceHelper", "General", 0, 0, true)]
+
     [ProvideOptionPage(typeof(CutomizedReferenceListPage), "DeeReferenceHelper", "CustomizedReferenceList", 0, 0, true, SupportsProfiles = true)]
     [ProvideProfile(typeof(OptionsProvider.CustomizedReferenceListOptions), "DeeReferenceHelper", "CustomizedReferenceList", 0, 0, true)]
+
+    [ProvideOptionPage(typeof(BusinessTierPathPage), "DeeReferenceHelper", "BusinessTierPathList", 0, 0, true, SupportsProfiles = true)]
+    [ProvideProfile(typeof(OptionsProvider.BusinessTierPathListOptions), "DeeReferenceHelper", "BusinessTierPathList", 0, 0, true)]
 
     [Guid(PackageGuids.DeeHelperString)]
     [ProvideToolWindow(typeof(GetActionGroupWindow.GetActionGroupWindow))]

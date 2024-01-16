@@ -31,7 +31,9 @@ namespace DeeHelper.Options
 
         public void Initialize()
         {
-            BusnissPathTextBox.Text = General.Instance.BusinessTierPath;
+            updateComboBoxItem();
+            var test = BusnissPathCB.SelectedItem = General.Instance.ProjectName;
+            BusnissPathCB.SelectedItem = General.Instance.ProjectName;
             ActionCodeStartTextBox.Text = General.Instance.ActionCodeStartLine;
             ActionCodeEndTextBox.Text = General.Instance.ActionCodeEndLine;
             VaildationCodeStartTextBox.Text = General.Instance.ValidationCodeStartLine;
@@ -41,20 +43,17 @@ namespace DeeHelper.Options
             General.Instance.Save();
         }
 
-        private void BusnissTierFolder(object sender, RoutedEventArgs e)
+        private void CBMouseDownEvent(object sender, MouseButtonEventArgs e)
         {
-            using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
-            {
-                System.Windows.Forms.DialogResult result = fbd.ShowDialog();
-
-                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    BusnissPathTextBox.Text = fbd.SelectedPath;
-                    General.Instance.BusinessTierPath = fbd.SelectedPath;
-                    General.Instance.Save();
-                }
-            }
+            updateComboBoxItem();
         }
+
+        private void projectNameChangedEvent(object sender, SelectionChangedEventArgs e)
+        {
+            General.Instance.ProjectName = BusnissPathCB.SelectedItem.ToString();
+            General.Instance.Save();
+        }
+
 
         private void ScanBusinessObjectClick(object sender, RoutedEventArgs e)
         {
@@ -105,11 +104,16 @@ namespace DeeHelper.Options
                 CheckBox checkBox = sender as CheckBox;
                 Name = checkBox.Name;
             }
+            if(sender is ComboBox)
+            {
+                ComboBox comboBox = sender as ComboBox;
+                Name = comboBox.Name;
+            }
 
             switch (Name)
             {
-                case "BusnissPathTextBox":
-                    DescriptionTB.Text = GetDescription(General.Instance, "BusinessTierPath");
+                case "BusnissPathCB":
+                    DescriptionTB.Text = GetDescription(General.Instance, "ProjectName");
                     break;
                 case "ActionCodeStartTextBox":
                     DescriptionTB.Text = GetDescription(General.Instance, "ActionCodeStartLine");
@@ -142,6 +146,20 @@ namespace DeeHelper.Options
             {
                 return Attribute.IsDefined(propertyInfo, typeof(DescriptionAttribute)) ? (Attribute.GetCustomAttribute(propertyInfo, typeof(DescriptionAttribute)) as DescriptionAttribute).Description : propertyInfo.Name;
             }
+        }
+
+        //Update ComboBox Item by BusinessTierPathList.Instance.BusinessTierPaths
+        private void updateComboBoxItem()
+        {
+            if(BusinessTierPathList.Instance.BusinessTierPaths != null)
+            {
+                List<string> currentCBProjectName = BusnissPathCB.Items.Cast<string>().ToList();
+                List<BusinessTierPathObj> businessObjs = BusinessTierPathList.Instance.BusinessTierPaths;
+                List<string> settingProjectName = businessObjs.Select(obj => obj.ProjectName).ToList();
+                List<string> newProjectName = settingProjectName.Except(currentCBProjectName).ToList();
+                newProjectName.ForEach(proName => BusnissPathCB.Items.Add(proName));
+            }
+           
         }
     }
 }
