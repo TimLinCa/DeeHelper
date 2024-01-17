@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c08d91f9-3592-4ff4-a0b2-018393a7f145</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DeeHelperShare</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\BusinessTier\AddBusinessTierPathForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\BusinessTier\AddBusinessTierPathForm.Designer.cs">
+      <DependentUpon>AddBusinessTierPathForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DeeHelperPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetActionGroupWindow\GetActionGroupWindow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetActionGroupWindow\GetActionGroupWindowCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetActionGroupWindow\GetActionGroupWindowControl.xaml.cs">
+      <DependentUpon>GetActionGroupWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MyCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\BusinessTier\BusinessTierPath.xaml.cs">
+      <DependentUpon>BusinessTierPath.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\BusinessTier\BusinessTierPathList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\BusinessTier\BusinessTierPathPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\CustomizedReferenceList\CustomizedReferenceList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\CustomizedReferenceList\CutomizedReferenceListPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\CustomizedReferenceList\CutomizedReferenceLists.xaml.cs">
+      <DependentUpon>CutomizedReferenceLists.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\General\General.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\General\GeneralOptionPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\General\GeneralOptions.xaml.cs">
+      <DependentUpon>GeneralOptions.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)GetActionGroupWindow\GetActionGroupWindowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Options\BusinessTier\BusinessTierPath.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Options\CustomizedReferenceList\CutomizedReferenceLists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Options\General\GeneralOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Options\General\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Options\CustomizedReferenceList\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)GetActionGroupWindow\Resources\GetActionGroupWindowCommand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Options\BusinessTier\AddBusinessTierPathForm.resx">
+      <DependentUpon>AddBusinessTierPathForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
