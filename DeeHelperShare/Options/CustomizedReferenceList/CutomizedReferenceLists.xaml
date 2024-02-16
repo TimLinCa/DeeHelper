@@ -19,8 +19,9 @@
 
             <DataGrid Background="White" x:Name="DGView" CurrentCellChanged="CellChange" SelectedItem="{Binding SeletedReference}" CanUserAddRows="False" CanUserResizeColumns="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="KeyWord" Binding="{Binding KeyWord}" Width="0.5*"></DataGridTextColumn>
                     <DataGridTextColumn Header="NameSpace" Binding="{Binding NameSpace}" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Assembles" Binding="{Binding Assembles}" Width="6*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Assembles" Binding="{Binding Assembles}" Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Column="1" Background="White">

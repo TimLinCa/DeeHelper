@@ -69,10 +69,11 @@ namespace DeeHelper
                 if (namespaceString.Substring(0, 6) == "System") continue;
                 while (true)
                 {
-                    if (referenceLists.Any(rl => rl.NameSpace == namespaceString))
+                    //Customized reference list
+                    if (referenceLists.Any(rl => namespaceString.SqlContains(rl.NameSpace)))
                     {
-                        List<ReferenceList> currentReferenceList = referenceLists.Where(rl => rl.NameSpace == namespaceString).ToList();
-                        List<string> currentUsingAssembles = currentReferenceList.Where(crl => crl.Assembles != string.Empty).Select(crl => crl.Assembles.Split(';')).ToList().SelectMany(_ => _).Distinct().ToList();
+                        List<ReferenceList> currentReferenceList = referenceLists.Where(rl => namespaceString.SqlContains(rl.NameSpace)).ToList();
+                        List<string> currentUsingAssembles = DivideStringByColon(currentReferenceList.Select(crl => crl.Assembles).Where(ass => !String.IsNullOrEmpty(ass)));
                         currentUsingAssembles = currentUsingAssembles.Select(name => getdllreference(name)).ToList();
                         usingAssmbles.AddRange(currentUsingAssembles);
                         break;
@@ -87,13 +88,6 @@ namespace DeeHelper
                     }
                     if (namespaceString.Contains("."))
                     {
-                        //Erp
-                        if (namespaceString.Substring(namespaceString.LastIndexOf(".") + 1) == "Erp")
-                        {
-                            string usereferencedll = getdllreference("Cmf.Custom.BusinessObjects.ErpCustomManagement");
-                            if (!usingAssmbles.Contains(usereferencedll)) usingAssmbles.Add(usereferencedll);
-                            break;
-                        }
                         //Customer
                         if (namespaceString.Contains("Cmf.Custom.") && namespaceString.Contains("BusinessObjects"))
                         {
@@ -142,15 +136,28 @@ namespace DeeHelper
                 }
             }
 
-            //Detect .AsEnumerable()
-            string AsEnumerableStr = ".AsEnumerable()";
-            if (IsContainObject(textviewlines, AsEnumerableStr, options))
+            //keyword
+            foreach(ReferenceList referenceList in referenceLists)
             {
-                usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel"));
-                usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel.Primitives"));
-                usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.Xml.ReaderWriter"));
-                usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.private.Xml"));
+                if (!String.IsNullOrEmpty(referenceList.KeyWord) && IsContainObject(textviewlines, referenceList.KeyWord, options))
+                {
+                    if(!String.IsNullOrEmpty(referenceList.NameSpace))
+                    {
+                        List<string> namespaces = referenceList.NameSpace.Split(';').ToList();
+                        usingString.AddRange(namespaces);
+                    }
+                    if(!String.IsNullOrEmpty(referenceList.Assembles))
+                    {
+                        List<string> assembles = referenceList.Assembles.Split(';').ToList();
+                        assembles.ForEach(assemble => usingAssmbles.Add(getdllreference(assemble)));
+                    }
+                    //usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel"));
+                    //usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.ComponentModel.Primitives"));
+                    //usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.Xml.ReaderWriter"));
+                    //usingAssmbles.Add(getdllreference(@"%MicrosoftNetPath%\\System.private.Xml"));
+                }
             }
+            usingString.Distinct();
             usingAssmbles.Distinct();
             string DeeResult = newLine;
             DeeResult += "/**Using Assembles**/" + newLine;
@@ -208,33 +215,9 @@ namespace DeeHelper
             return docView.TextView.FormattedLineSource.SourceTextSnapshot.Lines.ToList();
         }
 
-        private List<string> GetQuoteSet(string text, string separator)
-        {
-            List<string> stringSet = new List<string>();
-            int? indextemp = null;
-            int scanIndex = 0;
-            while (true)
-            {
-                int indexOfQuote;
-                indexOfQuote = text.IndexOf(separator, scanIndex);
-                if (indexOfQuote == -1) break;
-                scanIndex = indexOfQuote + 1;
-                if (indextemp == null) indextemp = indexOfQuote;
-                else
-                {
-                    stringSet.Add(text.Substring(indextemp.Value + 1, indexOfQuote - indextemp.Value - 1));
-                    indextemp = null;
-                }
-            }
-
-            return stringSet;
-
-
-        }
-
         private string getdllreference(string dllname)
         {
-            if (!dllname.Contains("dll"))
+            if (!dllname.Contains(".dll"))
             {
                 return $"UseReference(\"{dllname}.dll\", \"\");";
             }
@@ -258,7 +241,7 @@ namespace DeeHelper
 
             for (int i = StartDetectLine; i <= EndDetectLine; i++)
             {
-                if (!textviewlines[i].Extent.GetText().Contains("UseReference(") && textviewlines[i].Extent.GetText().Contains(objectName))
+                if (!textviewlines[i].Extent.GetText().Contains("UseReference(") && textviewlines[i].Extent.GetText().SqlContains(objectName))
                 {
                     return true;
                 }
@@ -266,7 +249,7 @@ namespace DeeHelper
 
             for (int i = ValidationCodeStartDetectLine; i <= ValidationCodeEndDetectLine; i++)
             {
-                if (!textviewlines[i].Extent.GetText().Contains("UseReference(") && textviewlines[i].Extent.GetText().Contains(objectName))
+                if (!textviewlines[i].Extent.GetText().Contains("UseReference(") && textviewlines[i].Extent.GetText().SqlContains(objectName))
                 {
                     return true;
                 }
@@ -274,6 +257,10 @@ namespace DeeHelper
 
             return false;
         }
-
+         
+        private List<string> DivideStringByColon(IEnumerable<string> strings)
+        {
+            return strings.Select(str => str.Split(';')).ToList().SelectMany(_ => _).Distinct().ToList();
+        }
     }
 }

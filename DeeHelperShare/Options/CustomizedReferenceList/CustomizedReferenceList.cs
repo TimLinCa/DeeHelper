@@ -18,12 +18,17 @@ namespace DeeHelper
     {
         [Category("CustomizedReferenceList")]
         [DisplayName("ReferenceList")]
-        [Description("Define the corresponding assembly of the namespace. Assemblies can be multiple values separated by semicolons.")]
-        public List<ReferenceList> ReferencesList { get; set; } = new List<ReferenceList>() { new ReferenceList() { NameSpace = "Z.Expressions", Assembles = "Z.Expressions.Eval.dll" } };
+        [Description("Define the corresponding assembly of the namespace. NameSpace and assemblies can be multiple values separated by semicolons. 1. NameSpace > Assemblies THEN 2. Keyword > NameSpace > Assemblies")]
+        public List<ReferenceList> ReferencesList { get; set; } = new List<ReferenceList>() {
+            new ReferenceList() { NameSpace = "Z.Expressions", Assembles = "Z.Expressions.Eval.dll" },
+            new ReferenceList() { KeyWord="%.AsEnumerable()%", Assembles = @"%MicrosoftNetPath%\\System.ComponentModel;" + @"%MicrosoftNetPath%\\System.ComponentModel.Primitives;" + @"%MicrosoftNetPath%\\System.Xml.ReaderWriter;" + @"%MicrosoftNetPath%\\System.private.Xml" },
+            new ReferenceList() { NameSpace="%.Erp", Assembles = "Cmf.Custom.BusinessObjects.ErpCustomManagement.dll" }
+        };
     }
 
     public class ReferenceList
     {
+        public string KeyWord { get; set; }
         public string NameSpace { get; set; }
         public string Assembles { get; set; }
     }
